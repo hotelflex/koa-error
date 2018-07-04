@@ -5,7 +5,7 @@ module.exports = environment => async (ctx, next) => {
     ctx.status = err.output ? err.output.statusCode || 500 : 500
     ctx.body =
       environment === 'production'
-        ? { message: err.message }
-        : { message: err.message, stack: err.stack }
+        ? { error: err.message }
+        : { error: err.message, stack: err.stack }
   }
 }
