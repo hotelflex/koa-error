@@ -1,3 +1,14 @@
+const extractMsg = err => {
+  const { name, message } = err
+  if (name && message) {
+    return `${name}: ${message}`
+  } else if (name && !message) {
+    return name
+  } else {
+    return message
+  }
+}
+
 module.exports = environment => async (ctx, next) => {
   try {
     await next()
@@ -5,9 +16,9 @@ module.exports = environment => async (ctx, next) => {
     ctx.status = err.output ? err.output.statusCode || 500 : 500
     ctx.body =
       environment === 'production'
-        ? { error: err.name ? `${err.name}: ${err.message}` : err.message }
+        ? { error: extractMsg(err) }
         : {
-            error: err.name ? `${err.name}: ${err.message}` : err.message,
+            error: extractMsg(err),
             stack: err.stack,
           }
   }
