@@ -1,6 +1,6 @@
 {
   "name": "@hotelflex/koa-error",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "main": "src",
   "scripts": {
     "precommit": "pretty-quick --staged"
